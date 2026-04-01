@@ -13,6 +13,7 @@ export const articles = pgTable('articles', {
   title: text('title').notNull(),
   year: integer('year').notNull(),
   posterUrl: text('poster_url').notNull(),
+  trailerUrl: text('trailer_url'),
   views: integer('views').default(0).notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 });

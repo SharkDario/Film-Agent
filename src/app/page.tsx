@@ -1,64 +1,83 @@
-import Image from "next/image";
+import { getMovies } from "@/lib/data";
+import { getMovieRatings } from "@/lib/data";
+import { FilmCard } from "@/components/FilmCard";
+import { SiteHeader } from "@/components/SiteHeader";
 
-export default function Home() {
+export default async function Home() {
+  const movies = await getMovies();
+  const moviesWithRatings = await getMovieRatings(movies);
+  
+  // Asumiremos que la primera película es la 'Destacada' (Hero)
+  const featuredMovie = movies[0];
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div className="min-h-screen bg-background text-foreground selection:bg-red-500/30">
+      <SiteHeader />
+      
+      <main className="pb-16">
+        {/* Hero Section */}
+        {featuredMovie && (
+          <section className="relative h-[60vh] min-h-[500px] w-full mt-[-64px]">
+            <div 
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+              style={{ backgroundImage: `url(${featuredMovie.posterUrl})` }}
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/10" />
+              <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent" />
+            </div>
+            
+            <div className="container relative mx-auto flex h-full max-w-7xl items-end px-4 pb-12 pt-24 sm:pb-16">
+              <div className="max-w-2xl space-y-4">
+                <div className="flex items-center gap-2">
+                  <span className="rounded-sm bg-red-600 px-2 py-0.5 text-xs font-bold uppercase tracking-wider text-white shadow-sm">
+                    Destacado
+                  </span>
+                  <span className="text-sm font-medium text-muted-foreground">{featuredMovie.year}</span>
+                </div>
+                <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-white">
+                  {featuredMovie.title}
+                </h1>
+                <p className="max-w-xl text-lg text-muted-foreground/90 font-medium">
+                  Una obra maestra de la ciencia y los algoritmos que reescribe la ética moderna e introduce dilemas que nos cuestionan qué significa estar vivo.
+                </p>
+                <div className="flex items-center gap-4 pt-4">
+                  <a
+                    href={`/movie/${featuredMovie.id}`}
+                    className="inline-flex h-11 items-center justify-center rounded-md bg-white px-8 font-medium text-black transition-colors hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-white/20 shadow-lg"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="mr-2"
+                    >
+                      <path d="M5 3l14 9-14 9V3z" />
+                    </svg>
+                    Análisis
+                  </a>
+                  <button className="inline-flex h-11 items-center justify-center rounded-md bg-zinc-800/80 px-8 font-medium text-white backdrop-blur-sm transition-colors hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-white/20 border border-white/10">
+                    Más Información
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Movie Grid Section */}
+        <section className="container mx-auto max-w-7xl px-4 mt-8">
+          <h2 className="text-xl font-bold mb-6 tracking-tight flex items-center gap-2">
+            <span className="w-1 h-6 bg-red-600 rounded-full inline-block"></span>
+            Últimos Artículos
+          </h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-4 gap-y-8">
+            {moviesWithRatings.map((movie) => (
+              <FilmCard key={movie.id} movie={movie} />
+            ))}
+          </div>
+        </section>
       </main>
     </div>
   );
