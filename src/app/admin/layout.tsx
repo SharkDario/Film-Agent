@@ -2,6 +2,7 @@ import { checkIsAdmin } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { SiteHeader } from "@/components/SiteHeader";
 
+
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const isAdmin = await checkIsAdmin();
 

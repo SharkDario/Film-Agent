@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono, DM_Sans } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from '@clerk/themes';
 import { esES } from '@clerk/localizations';
 import "./globals.css";
 
-const geistSans = Geist({
+const dmSans = DM_Sans({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
@@ -29,7 +29,7 @@ export default function RootLayout({
     <ClerkProvider appearance={{ baseTheme: dark }} localization={esES}>
       <html
         lang="en"
-        className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
+        className={`${dmSans.variable} ${geistMono.variable} h-full antialiased dark`}
       >
         <body className="min-h-full flex flex-col bg-background text-foreground">
           {children}

@@ -11,6 +11,14 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'image.tmdb.org',
       },
+            {
+        protocol: 'https',
+        hostname: 'i.blogs.es',
+      },
+            {
+        protocol: "https",
+        hostname: "www.espinof.com",
+      },
     ],
   },
 };

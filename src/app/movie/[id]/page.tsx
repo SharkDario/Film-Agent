@@ -26,6 +26,46 @@ function getYouTubeEmbedUrl(url: string) {
   return (match && match[2].length === 11) ? `https://www.youtube.com/embed/${match[2]}` : null;
 }
 
+function TextContent({ text }: { text: string }) {
+  const listStartMatch = text.match(/:\s*\n-\s/);
+  
+  if (!listStartMatch) {
+    return <p className="text-sm leading-relaxed">{text}</p>;
+  }
+
+  const splitIndex = text.indexOf(listStartMatch[0]);
+  const intro = text.substring(0, splitIndex + 1);
+  const rest = text.substring(splitIndex + 1).trim();
+  
+  // Separar líneas
+  const lines = rest.split('\n').map(l => l.trim()).filter(Boolean);
+  
+  const items: string[] = [];
+  const closingLines: string[] = [];
+  
+  for (const line of lines) {
+    if (line.startsWith('- ')) {
+      items.push(line.substring(2));
+    } else {
+      closingLines.push(line);
+    }
+  }
+
+  return (
+    <div className="text-sm leading-relaxed">
+      {intro && <p className="mb-2">{intro}</p>}
+      <ul className="list-disc list-inside space-y-1">
+        {items.map((item, i) => (
+          <li key={i}>{item}</li>
+        ))}
+      </ul>
+      {closingLines.length > 0 && (
+        <p className="mt-2">{closingLines.join(' ')}</p>
+      )}
+    </div>
+  );
+}
+
 export default async function MoviePage({ params }: MoviePageProps) {
   // En Next.js >14.2 el objeto params puede venir como Promesa, lo resolvemos primero.
   const resolvedParams = await params;
@@ -182,21 +222,25 @@ export default async function MoviePage({ params }: MoviePageProps) {
                <div className="space-y-4">
                  <div>
                    <h4 className="font-medium text-white mb-1">¿Cómo funciona hoy?</h4>
-                   <p className="text-sm leading-relaxed">{movie.documentation.howItWorks}</p>
+                   {/*<p className="text-sm leading-relaxed">{movie.documentation.howItWorks}</p>*/}
+                   <TextContent text={movie.documentation.howItWorks} />
                  </div>
                  <div>
                    <h4 className="font-medium text-white mb-1">Limitaciones Actuales</h4>
-                   <p className="text-sm leading-relaxed">{movie.documentation.limitations}</p>
+                    {/*<p className="text-sm leading-relaxed">{movie.documentation.limitations}</p>*/}
+                   <TextContent text={movie.documentation.limitations} />
                  </div>
                </div>
                <div className="space-y-4">
                  <div>
                    <h4 className="font-medium text-white mb-1">Distancia a la Realidad</h4>
-                   <p className="text-sm leading-relaxed">{movie.documentation.distanceToReality}</p>
+                   {/*<p className="text-sm leading-relaxed">{movie.documentation.distanceToReality}</p>*/}
+                   <TextContent text={movie.documentation.distanceToReality} />
                  </div>
                  <div>
                    <h4 className="font-medium text-white mb-1">Avances Requeridos</h4>
-                   <p className="text-sm leading-relaxed">{movie.documentation.requiredAdvances}</p>
+                   {/*<p className="text-sm leading-relaxed">{movie.documentation.requiredAdvances}</p>*/}
+                   <TextContent text={movie.documentation.requiredAdvances} />
                  </div>
                </div>
             </div>
