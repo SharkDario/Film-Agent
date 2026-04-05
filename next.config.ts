@@ -19,6 +19,14 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "www.espinof.com",
       },
+            {
+        protocol: 'https',
+        hostname: 'i.blogs.es',
+      },
+            {
+        protocol: "https",
+        hostname: "www.espinof.com",
+      },
     ],
   },
 };
