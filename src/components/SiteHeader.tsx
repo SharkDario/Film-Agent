@@ -33,8 +33,11 @@ export async function SiteHeader() {
           ) : (
             <>
               {isAdmin && (
-                <Link href="/admin/movies/new" className="text-sm font-medium hover:underline text-foreground/80 mr-4">
-                  Añadir Película
+                <Link
+                  href="/admin/movies/new"
+                  className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded-md text-sm font-medium transition"
+                >
+                  ➕ Añadir Película
                 </Link>
               )}
               <UserButton />
