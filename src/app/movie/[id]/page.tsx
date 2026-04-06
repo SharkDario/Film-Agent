@@ -164,24 +164,28 @@ export default async function MoviePage({ params }: MoviePageProps) {
             <h2 className="text-2xl font-bold border-b border-border/50 pb-2 flex gap-2 items-center">
               <span className="w-1.5 h-6 bg-red-600 rounded-sm"></span> Catálogo de IA
             </h2>
-            <div className="grid gap-6">
-              {movie.aiElements.map((el) => (
-                <div key={el.id} className="bg-muted/30 p-6 rounded-lg border border-white/5 shadow-sm">
-                  <h3 className="text-xl font-semibold mb-2 text-red-100">{el.name}</h3>
-                  <p className="text-muted-foreground mb-4 leading-relaxed">{el.description}</p>
-                  <div className="grid sm:grid-cols-2 gap-4 text-sm bg-black/40 p-4 rounded-md">
-                    <div>
-                      <span className="block font-medium text-white/70 uppercase text-xs tracking-wider mb-1">Tipo de IA</span>
-                      <span className="text-white/90">{el.type}</span>
-                    </div>
-                    <div>
-                      <span className="block font-medium text-white/70 uppercase text-xs tracking-wider mb-1">Equivalente Real</span>
-                      <span className="text-white/90">{el.realWorldEquivalent}</span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <div className="grid gap-6 md:grid-cols-2">
+  {movie.aiElements.map((el) => (
+    <div key={el.id} className="bg-muted/30 p-5 rounded-lg border border-white/5 shadow-sm h-full">
+      <h3 className="text-lg font-semibold mb-2 text-red-100">{el.name}</h3>
+      <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{el.description}</p>
+      <div className="grid gap-4 text-sm bg-black/40 p-4 rounded-md">
+        <div>
+          <span className="block font-medium text-white/70 uppercase text-xs tracking-wider mb-1">
+            Tipo de IA
+          </span>
+          <span className="text-white/90">{el.type}</span>
+        </div>
+        <div>
+          <span className="block font-medium text-white/70 uppercase text-xs tracking-wider mb-1">
+            Equivalente Real
+          </span>
+          <span className="text-white/90">{el.realWorldEquivalent}</span>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
           </section>
         )}
 
