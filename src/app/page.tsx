@@ -6,26 +6,26 @@ import { SiteHeader } from "@/components/SiteHeader";
 export default async function Home() {
   const movies = await getMovies();
   const moviesWithRatings = await getMovieRatings(movies);
-  
+
   // Asumiremos que la primera película es la 'Destacada' (Hero)
   const featuredMovie = movies[0];
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-red-500/30">
       <SiteHeader />
-      
+
       <main className="pb-16">
         {/* Hero Section */}
         {featuredMovie && (
           <section className="relative h-[60vh] min-h-[500px] w-full mt-[-64px]">
-            <div 
+            <div
               className="absolute inset-0 bg-cover bg-center bg-no-repeat"
               style={{ backgroundImage: `url(${featuredMovie.posterUrl})` }}
             >
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/10" />
               <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent" />
             </div>
-            
+
             <div className="container relative mx-auto flex h-full max-w-7xl items-end px-4 pb-12 pt-24 sm:pb-16">
               <div className="max-w-2xl space-y-4">
                 <div className="flex items-center gap-2">
@@ -38,7 +38,7 @@ export default async function Home() {
                   {featuredMovie.title}
                 </h1>
                 <p className="max-w-xl text-lg text-muted-foreground/90 font-medium">
-                  Una obra maestra de la ciencia y los algoritmos que reescribe la ética moderna e introduce dilemas que nos cuestionan qué significa estar vivo.
+                  {featuredMovie.description}
                 </p>
                 <div className="flex items-center gap-4 pt-4">
                   <a

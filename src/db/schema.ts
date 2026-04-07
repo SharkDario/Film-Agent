@@ -16,6 +16,7 @@ export const articles = pgTable('articles', {
   trailerUrl: text('trailer_url'),
   views: integer('views').default(0).notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
+  description: text('description'),
 });
 
 export const aiElements = pgTable('ai_elements', {
