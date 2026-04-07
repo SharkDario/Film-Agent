@@ -20,6 +20,7 @@ export async function createMovieArticle(formData: FormData) {
   const year = parseInt(formData.get("year") as string, 10);
   const posterUrl = formData.get("poster") as string;
   const trailerUrl = formData.get("trailer") as string;
+  const description = formData.get("description") as string;
 
   if (!title || !year || !posterUrl) {
     throw new Error("Por favor completa todos los campos básicos de la película.");
@@ -31,6 +32,7 @@ export async function createMovieArticle(formData: FormData) {
     year,
     posterUrl,
     trailerUrl,
+    description,
     views: 0
   }).returning();
 
@@ -53,9 +55,10 @@ export async function updateMovieBasic(articleId: number, formData: FormData) {
   const year = parseInt(formData.get("year") as string, 10);
   const posterUrl = formData.get("poster") as string;
   const trailerUrl = formData.get("trailer") as string;
+  const description = formData.get("description") as string;
 
   await db.update(articles)
-    .set({ title, year, posterUrl, trailerUrl })
+    .set({ title, year, posterUrl, trailerUrl, description })
     .where(eq(articles.id, articleId));
 
   revalidatePath(`/movie/${articleId}`);

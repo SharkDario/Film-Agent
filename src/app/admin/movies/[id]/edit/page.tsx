@@ -72,6 +72,10 @@ export default async function EditMoviePage({ params }: EditPageProps) {
               <label className="text-sm text-foreground">Trailer URL (YouTube)</label>
               <input type="url" name="trailer" defaultValue={movie.trailerUrl || ''} className="w-full h-10 rounded-md border border-input bg-background/50 px-3 py-2 text-sm text-white" placeholder="https://www.youtube.com/watch?v=..." />
             </div>
+            <div className="space-y-2">
+              <label className="text-sm text-foreground">Descripción</label>
+              <textarea name="description" defaultValue={movie.description || ''} className="w-full p-3 rounded-md border border-input bg-background/50 text-sm h-24 text-white" placeholder="Describe brevemente la película..."></textarea>
+            </div>
             <button type="submit" className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md text-sm font-medium transition">Actualizar Película</button>
           </form>
         </section>

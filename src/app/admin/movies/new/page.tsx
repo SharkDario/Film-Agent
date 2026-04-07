@@ -109,6 +109,22 @@ export default function NewMoviePage() {
                  </p>
               </div>
 
+              <div className="space-y-2">
+                 <label htmlFor="description" className="text-sm font-medium leading-none text-foreground">
+                   Descripción
+                 </label>
+                 <textarea
+                   name="description"
+                   id="description"
+                   rows={4}
+                   className="flex w-full rounded-md border border-input bg-background/50 px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 transition-colors"
+                   placeholder="Añade una descripción de la película y cómo se relaciona con la IA..."
+                 />
+                 <p className="text-[0.8rem] text-muted-foreground mt-1">
+                   Se mostrará principalmente como texto destacado en recomendaciones y vistas.
+                 </p>
+              </div>
+
            </div>
 
            <div className="border-t border-border/50 pt-6 flex items-center justify-end gap-4">
