@@ -60,7 +60,6 @@ export async function updateMovieBasic(articleId: number, formData: FormData) {
 
   revalidatePath(`/movie/${articleId}`);
   revalidatePath("/");
-  return { success: true };
 }
 
 export async function addAiElement(articleId: number, formData: FormData) {
@@ -81,7 +80,6 @@ export async function addAiElement(articleId: number, formData: FormData) {
   });
 
   revalidatePath(`/movie/${articleId}`);
-  return { success: true };
 }
 
 export async function deleteAiElement(articleId: number, elementId: number) {
@@ -91,7 +89,6 @@ export async function deleteAiElement(articleId: number, elementId: number) {
   await db.delete(aiElements).where(eq(aiElements.id, elementId));
 
   revalidatePath(`/movie/${articleId}`);
-  return { success: true };
 }
 
 export async function saveTechnicalAnalysis(articleId: number, formData: FormData) {
@@ -114,7 +111,6 @@ export async function saveTechnicalAnalysis(articleId: number, formData: FormDat
   }
 
   revalidatePath(`/movie/${articleId}`);
-  return { success: true };
 }
 
 export async function saveDocumentation(articleId: number, formData: FormData) {
@@ -141,7 +137,6 @@ export async function saveDocumentation(articleId: number, formData: FormData) {
   }
 
   revalidatePath(`/movie/${articleId}`);
-  return { success: true };
 }
 
 export async function saveEssay(articleId: number, formData: FormData) {
@@ -165,7 +160,6 @@ export async function saveEssay(articleId: number, formData: FormData) {
   }
 
   revalidatePath(`/movie/${articleId}`);
-  return { success: true };
 }
 
 // ----------------------------------------------------
